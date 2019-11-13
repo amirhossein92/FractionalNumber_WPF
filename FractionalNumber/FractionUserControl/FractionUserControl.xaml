@@ -1,13 +1,29 @@
-﻿<UserControl xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"  x:Class="FractionalNumber.FractionUserControl.FractionUserControl"
+﻿<UserControl x:Class="FractionalNumber.FractionUserControl.FractionUserControl"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FractionalNumber.FractionUserControl"
              xmlns:base="clr-namespace:FractionalNumber.Base"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
              mc:Ignorable="d" 
-             d:DesignHeight="25" d:DesignWidth="250">
+             d:DesignHeight="25" d:DesignWidth="250"
+             x:Name="UserControl">
+    <UserControl.Resources>
+        <base:FractionalConverter x:Key="FractionalConverter"/>
+    </UserControl.Resources>
     <Grid>
-        <base:SdsFractionalTextEdit x:Name="SpinEdit" EditValueChanged="SpinEdit_OnEditValueChanged"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <base:SdsFractionalTextEdit x:Name="MyFractionalTextEdit" Grid.Column="0"
+                                        EditValue="{Binding Path=EditValue, RelativeSource={RelativeSource AncestorType=UserControl}, 
+            Converter={StaticResource FractionalConverter}}"/>
+        <dxe:SpinEdit x:Name="MySpinEdit" EditValueType="{x:Type sys:Double}" Grid.Column="0"
+                          EditValue="{Binding Path=EditValue, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+        <dx:SimpleButton x:Name="MySimpleButton" Click="ButtonBase_OnClick"  Height="25" Grid.Column="1" Content="⅔" FontWeight="Bold"/>
     </Grid>
 </UserControl>

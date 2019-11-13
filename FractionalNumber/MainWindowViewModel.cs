@@ -10,6 +10,12 @@ namespace FractionalNumber
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
+        public MainWindowViewModel()
+        {
+            Value = 100.25;
+            ValueTT = 10.25;
+
+        }
 
         private double _value;
         public double Value
@@ -22,6 +28,16 @@ namespace FractionalNumber
             }
         }
 
+        private double _valueTT;
+        public double ValueTT
+        {
+            get => _valueTT;
+            set
+            {
+                _valueTT = value;
+                OnPropertyChanged();
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace FractionalNumber
 {
@@ -24,6 +25,13 @@ namespace FractionalNumber
         {
             InitializeComponent();
             DataContext = new MainWindowViewModel();
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            var val = ((MainWindowViewModel) DataContext).Value;
+            MessageBox.Show(val.ToString());
+            ((MainWindowViewModel) DataContext).Value = 5;
         }
     }
 }

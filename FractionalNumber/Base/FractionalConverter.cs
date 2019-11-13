@@ -13,30 +13,33 @@ namespace FractionalNumber.Base
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            string result = null;
+
             if (value != null)
             {
                 var doubleValue = System.Convert.ToDouble(value);
-                var rational = Rational.Approximate(doubleValue, tolerance: 0.001);
+                var rational = Rational.Approximate(doubleValue, tolerance: 0.01);
                 var text = rational.ToString("W");
                 text = text.Replace(" + ", " ");
-                return text;
+                result = text;
             }
-            return "";
+
+            return result;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var textValue = (string)value;
-            if (textValue != null)
+            if (string.IsNullOrEmpty(textValue) == false)
             {
                 var splittedWithSpace = textValue.Split(' ');
                 int mainNumber = int.Parse(splittedWithSpace[0]);
                 int numerator = 0;
                 int denominator = 1;
 
-                if (splittedWithSpace.Length > 1)
+                if (char.IsDigit(splittedWithSpace[1][0]))
                 {
-                    var splittedWithSlash = splittedWithSpace[splittedWithSpace.Length - 1].Split('/');
+                    var splittedWithSlash = splittedWithSpace[1].Split('/');
                     numerator = int.Parse(splittedWithSlash[0]);
                     denominator = int.Parse(splittedWithSlash[1]);
                 }
@@ -46,7 +49,7 @@ namespace FractionalNumber.Base
                 return result;
             }
 
-            return 0;
+            return null;
         }
     }
 }

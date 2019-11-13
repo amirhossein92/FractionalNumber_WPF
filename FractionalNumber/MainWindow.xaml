@@ -7,15 +7,24 @@
         xmlns:fractionUserControl="clr-namespace:FractionalNumber.FractionUserControl"
         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
         xmlns:base="clr-namespace:FractionalNumber.Base"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Window.Resources>
+    <!--<Window.Resources>
         <base:FractionalConverter x:Key="FractionalConverter"/>
-    </Window.Resources>
-    <StackPanel VerticalAlignment="Center" Margin="20" Width="250">
-        <TextBlock>In Fractional: </TextBlock>
-        <base:SdsFractionalTextEdit x:Name="FractionalTextEdit" EditValue="{Binding Mode=TwoWay, Path=Value }"/>
+    </Window.Resources>-->
+    <StackPanel VerticalAlignment="Center" Width="250" Margin="10">
+
+        <fractionUserControl:FractionUserControl EditValue="{Binding Mode=TwoWay, Path=Value}"/>
+        <TextBox  Text="SSS" Visibility="Hidden"/>
+        <Button Content="HELLO" Click="ButtonBase_OnClick"/>
+        <!--<TextBlock>In Fractional:</TextBlock>
+        <base:SdsFractionalTextEdit x:Name="FractionalTextEdit" EditValue="{Binding Mode=TwoWay, Path=Value }" />
         <TextBlock>In Decimal:</TextBlock>
         <dxe:SpinEdit x:Name="SpinEdit" EditValue="{Binding Mode=TwoWay, Path=Value}"/>
+        <Button Click="ButtonBase_OnClick"/>-->
+
+        <!--<TextBlock>In Both:</TextBlock>-->
+        <!--<fractionUserControl:FractionUserControl/>-->
     </StackPanel>
 </Window>
